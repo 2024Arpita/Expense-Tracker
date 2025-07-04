@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;700&display=swap');
+@import "tailwindcss";
+
+/* helps to set custom design values so we dont need to repeat this everwhere */
+@theme{
+    --font-display:"Poppins","sans-serif";
+    --breakpoint-3xl:1920px;
+    --color-primary:#875cf5;
+}
+/* sets default styles for website   */
+@layer base{
+    html{        /*html will have font as Poppins*/
+        font-family: var(--font-display);
+    }
+
+    body{
+        background-color: #fcfbfc;
+        overflow-x:hidden;   /*Hides any horizontal scroll so content doesn’t overflow sideways*/
+    }
+}
+
+.input-box {
+    @apply w-full flex justify-between gap-3 text-sm text-black bg-slate-100 px-4 py-3 mb-4 mt-3 border border-slate-200 outline-none; 
+}
+
+.btn-primary{
+    @apply w-full text-sm font-medium text-white bg-violet-500 shadow-lg shadow-purple-600/5 p-[10px] rounded-md my-1 hover:bg-purple-600/15 hover:text-purple-600;
+}
