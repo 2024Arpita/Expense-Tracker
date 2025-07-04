@@ -18,10 +18,6 @@ app.use(
 )
 
 app.use(express.json());
-app.get("/", (req, res) => {
-  console.log("✅ Root route hit");
-  res.send("API is running...");
-});
 
 connectDB();
 
