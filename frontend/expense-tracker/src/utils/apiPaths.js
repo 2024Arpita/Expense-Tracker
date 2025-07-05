@@ -1,3 +1,4 @@
+export const BASE_URL="http://localhost:8000"
 //utils/apiPaths.js
 
 export const API_PATHS={
@@ -8,7 +9,7 @@ export const API_PATHS={
     },
 
     DASHBOARD:{
-        GET_DATA:"/api/v1/dashboard/",
+        GET_DATA:"/api/v1/dashboard",
     },
 
     INCOME:{
