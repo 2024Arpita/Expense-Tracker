@@ -4,16 +4,22 @@ import {Link, useNavigate} from "react-router-dom"
 import Input from '../../components/Inputs/Input';
 import { validateEmail } from '../../utils/helper';
 import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector';
+import axiosInstance from '../../utils/axiosinstance';
+import { API_PATHS } from '../../utils/apiPaths';
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
+import uploadImage from '../../utils/uploadImage';
 
 
 const SignUp = () => {
   const [profilePic,setProfilePic]=useState(null);
-  const [fullNmae,setFullName]=useState("");
+  const [fullName,setFullName]=useState("");
   const [email,setEmail] =useState("");
   const[password, setPassword]=useState("");
 
   const [error,setError]=useState(null);
 
+  const {updateUser}=useContext(UserContext);
   const navigate=useNavigate();
   
   //Hnadle sign up form submit
@@ -21,7 +27,7 @@ const SignUp = () => {
     e.preventDefault();
 
     let profileImageUrl="";
-    if(!fullNmae){
+    if(!fullName){
       setError("Please enter your name")
       return;
     }
@@ -39,6 +45,35 @@ const SignUp = () => {
     setError("");
 
     //API CALL FOR SIGNUP
+    try {
+
+      //Upload iamge if present
+      if(profilePic){
+        const imageUploadres=await uploadImage(profilePic);
+        profileImageUrl=imageUploadres.imageUrl ||"";
+
+      }
+      const response =await axiosInstance.post(API_PATHS.AUTH.REGISTER,{
+        fullName,
+        email,
+        password,
+        profileImageUrl
+      })
+
+      const {token,user}=response.data;
+
+      if(token){
+        localStorage.setItem("token",token);
+        updateUser(user);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      if(error.response && error.response.data.message){
+        setError(error.response.data.message);
+      }else{
+        setError("Something went wrong .Please try again")
+      }
+    }
   };
   return (
     <AuthLayout>
@@ -54,7 +89,7 @@ const SignUp = () => {
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             <Input
-            value={(fullNmae)}
+            value={(fullName)}
             onChange={({target})=>setFullName(target.value)}
             label="Full Name"
             placeholder="John"
