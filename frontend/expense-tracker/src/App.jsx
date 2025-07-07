@@ -18,7 +18,6 @@ const App = () => {
     <UserProvider>
       <div>
         <Router>
-          {" "}
           {/* define routes for each page to redirect */}
           <Routes>
             <Route path="/" element={<Root />} />
