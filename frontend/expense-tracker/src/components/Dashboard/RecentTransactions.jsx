@@ -8,7 +8,7 @@ const RecentTransactions = ({transactions,onSeeMore}) => {
         <div className='flex items-center justify-between'>
             <h5 className='text-lg'>Recent Transactions</h5>
 
-            <button className='card-bin' onClick={onSeeMore}>
+            <button className='card-btn' onClick={onSeeMore}>
                 See All <LuArrowRight className='text-base' />
             </button>
         </div> 
@@ -19,7 +19,7 @@ const RecentTransactions = ({transactions,onSeeMore}) => {
             key={item._id}
             title={item.type=='expense' ? item.category :item.source}
             icon={item.icon}
-            date={moment(item.date).format("DD MM YYYY")}
+            date={moment(item.date).format("Do MMM YYYY")}
             amount={item.amount}
             type={item.type}
             hideDeleteBtn

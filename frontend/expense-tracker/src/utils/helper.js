@@ -1,3 +1,4 @@
+import  moment from 'moment';
 export const validateEmail=(email)=>{
     const regex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
@@ -25,4 +26,14 @@ export const addThousandsSeperator= (num)=>{
     return fractionalPart
         ? `${formattedInteger}.${fractionalPart}`
         : formattedInteger;
+}
+
+
+export const prepareExpenseBarChartData = (data=[])=>{
+    const charData =data.map((item)=>({
+        category:item?.category,
+        amount:item?.amount,
+        month: moment(item?.date).format("MMM YYYY"), // 👈 Converts date to "Jul 2025"
+    }))
+    return charData;
 }
