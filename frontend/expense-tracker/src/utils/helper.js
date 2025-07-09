@@ -33,7 +33,18 @@ export const prepareExpenseBarChartData = (data=[])=>{
     const charData =data.map((item)=>({
         category:item?.category,
         amount:item?.amount,
-        month: moment(item?.date).format("MMM YYYY"), // 👈 Converts date to "Jul 2025"
+        month: moment(item?.date).format("Do MMM"), // 👈 Converts date to "23 Jul"
     }))
     return charData;
+}
+
+export const prepareIncomeBarChartData=(data=[])=>{
+    const sortedData=[...data].sort((a,b) => new Date(a.date)-new Date(b.date))
+
+    const chartData=sortedData.map((item)=>({
+        month:moment(item?.date).format('Do MMM'),
+        amount:item?.amount,
+        source:item?.source,
+    }))
+    return chartData
 }
