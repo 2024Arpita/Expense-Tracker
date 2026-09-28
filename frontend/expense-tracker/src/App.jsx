@@ -11,7 +11,9 @@ import SignUp from "./pages/Auth/SignUp";
 import Home from "./pages/Dashboard/Home";
 import Income from "./pages/Dashboard/Income";
 import Expense from "./pages/Dashboard/Expense";
+import Budget from "./pages/Dashboard/Budget";
 import UserProvider from "./context/UserContext";
+import SocketProvider from "./context/SocketContext";
 import {Toaster} from "react-hot-toast"
 
 const App = () => {
@@ -19,15 +21,18 @@ const App = () => {
     <UserProvider>
       <div>
         <Router>
-          {/* define routes for each page to redirect */}
-          <Routes>
-            <Route path="/" element={<Root />} />
-            <Route path="/login" exact element={<Login />} />
-            <Route path="/SignUp" exact element={<SignUp />} />
-            <Route path="/dashboard" exact element={<Home />} />
-            <Route path="/income" exact element={<Income />} />
-            <Route path="/expense" exact element={<Expense />} />
-          </Routes>
+          <SocketProvider>
+            {/* define routes for each page to redirect */}
+            <Routes>
+              <Route path="/" element={<Root />} />
+              <Route path="/login" exact element={<Login />} />
+              <Route path="/SignUp" exact element={<SignUp />} />
+              <Route path="/dashboard" exact element={<Home />} />
+              <Route path="/income" exact element={<Income />} />
+              <Route path="/expense" exact element={<Expense />} />
+              <Route path="/budget" exact element={<Budget />} />
+            </Routes>
+          </SocketProvider>
         </Router>
       </div>
 
@@ -55,3 +60,4 @@ const Root = () => {
     <Navigate to="/login" />
   );
 };
+
