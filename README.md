@@ -1,6 +1,6 @@
 # Expense Tracker
 
-A full-stack personal finance management application built with the MERN stack for tracking income, expenses, and spending insights.
+A full-stack personal finance management application built with the MERN stack for tracking income, expenses, budgets, and spending insights.
 
 ## Features
 
@@ -10,6 +10,10 @@ A full-stack personal finance management application built with the MERN stack f
 * User-specific transaction history
 * Dashboard with financial summaries and spending insights
 * Category-based expense tracking
+* Monthly budget creation and management
+* Real-time budget alerts using Socket.IO
+* Budget warning when spending reaches 80% of the monthly limit
+* Budget exceeded notification when spending reaches 100% of the monthly limit
 * Protected REST APIs
 * Export income and expense records to Excel
 * Responsive React interface
@@ -23,6 +27,7 @@ A full-stack personal finance management application built with the MERN stack f
 * Tailwind CSS
 * React Router
 * Axios
+* Socket.IO Client
 * Recharts
 
 **Backend**
@@ -32,6 +37,7 @@ A full-stack personal finance management application built with the MERN stack f
 * MongoDB
 * Mongoose
 * JWT
+* Socket.IO
 * Multer
 * XLSX
 
