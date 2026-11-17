@@ -40,7 +40,8 @@ const Login = () => {
       const {token,user}=response.data;
       
       if(token){
-        localStorage.setItem("token",token)
+        localStorage.setItem("authToken",token)
+
         updateUser(user)
         navigate("/dashboard");
       }

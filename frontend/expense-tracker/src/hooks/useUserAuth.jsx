@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { UserContext } from './../context/UserContext';
 import { useNavigate } from "react-router-dom";
 import axiosInstance from './../utils/axiosinstance';
@@ -7,11 +7,16 @@ import { API_PATHS } from "../utils/apiPaths";
 export const useUserAuth =()=>{
     const {user,updateUser,clearUser} =useContext(UserContext);
     const navigate =useNavigate();
-
+// 💡 1. Add loading state, initialized to true
+  const [authLoading, setAuthLoading] = useState(true);
     useEffect(()=>{
-        if(user) return;
+        if(user){
+            setAuthLoading(false);//sel loading to false if user exists
+            return;
+        }
 
         let isMounted=true;
+        setAuthLoading(true);
 
         const fetchUserInfo =async ()=>{
             try {
@@ -25,6 +30,10 @@ export const useUserAuth =()=>{
                     clearUser();
                     navigate("/login")
                 }
+            }finally{
+                if(isMounted){
+                    setAuthLoading(false);
+                }
             }
         }
 
@@ -34,5 +43,6 @@ export const useUserAuth =()=>{
             isMounted=false;
         }
 
-    },[updateUser,clearUser,navigate])
+    },[user,updateUser,clearUser,navigate])
+    return {user,authLoading};
 }
